@@ -17,13 +17,11 @@ import java.util.List;
 public class RiotAPIService {
 
     @Autowired
-    static
-    OpenRiotApiClient riotApiClient = new OpenRiotApiClient();
+    OpenRiotApiClient riotApiClient;
     @Autowired
-    static
-    RiotAPIRepository riotAPIRepository = new RiotAPIRepository();
+    RiotAPIRepository riotAPIRepository;
 
-    public static StoredLeague getLeagueByName(String userName) throws IOException {
+    public StoredLeague getLeagueByName(String userName) throws IOException {
         String summonerId = riotApiClient.requestEncryptedSummonerIdByName(userName).getId();
         List<League> leagues = riotApiClient.requestLeagueByEncryptedId( summonerId );
         StoredLeague storedLeague = new StoredLeague();

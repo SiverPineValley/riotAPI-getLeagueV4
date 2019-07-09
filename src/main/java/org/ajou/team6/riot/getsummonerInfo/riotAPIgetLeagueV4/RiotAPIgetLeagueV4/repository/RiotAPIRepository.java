@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public class RiotAPIRepository {
     @Autowired
-    MongoTemplate mongoTemplate = new MongoTemplate(new MongoClient(), "Leagues");
+    MongoTemplate mongoTemplate;
 
     public void insertStoredLeague(StoredLeague storedLeague) {
         mongoTemplate.insert(storedLeague, "storedLeague");

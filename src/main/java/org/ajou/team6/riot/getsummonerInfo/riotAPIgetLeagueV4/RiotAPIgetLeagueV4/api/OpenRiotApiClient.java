@@ -1,6 +1,5 @@
 package org.ajou.team6.riot.getsummonerInfo.riotAPIgetLeagueV4.RiotAPIgetLeagueV4.api;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.extern.slf4j.Slf4j;
 import org.ajou.team6.riot.getsummonerInfo.riotAPIgetLeagueV4.RiotAPIgetLeagueV4.domain.League;
 import org.ajou.team6.riot.getsummonerInfo.riotAPIgetLeagueV4.RiotAPIgetLeagueV4.domain.Summoner;
@@ -25,7 +24,7 @@ public class OpenRiotApiClient {
     private String requestParam = "?api_key={key}";
 
     @Autowired
-    RestTemplate restTemplate = new RestTemplate();
+    RestTemplate restTemplate;
 
     @PostConstruct
     public void loadOpenRiotApiKey() throws IOException {
@@ -39,7 +38,6 @@ public class OpenRiotApiClient {
     public Summoner requestEncryptedSummonerIdByName(String userName) throws IOException {
         if(key == null) loadOpenRiotApiKey();
         String RealUrl = openEncryptedIdUrl + userName + requestParam;
-//        log.info(RealUrl + " " + getOpenRiotApiKey());
         return restTemplate.exchange(RealUrl,HttpMethod.GET, null, Summoner.class, getOpenRiotApiKey()).getBody();
     }
 
